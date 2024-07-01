@@ -7,22 +7,22 @@ Will be built in the service layer from a combo of database and 3P-API calls
  */
 
 import com.northcoders.surfeillance.model.Spot;
+import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidalEvent;
+import com.northcoders.surfeillance.service.apis.waveAPI.CurrentMarineData;
+import com.northcoders.surfeillance.service.apis.waveAPI.CurrentWaveData;
+import com.northcoders.surfeillance.service.apis.weatherAPI.CurrentWeatherData;
 
 public class ConditionsDTO {
 
-    // Commented to compile/test
+    private Spot spot;
+    private CurrentMarineData currentMarineData;
+    private CurrentWeatherData currentWeatherData;
+    private TidalEvent tidalEventDTO;
 
-//    private Spot spot;
-//    private TidalEventDTO tidalEventDTO;
-//    private CurrentMarineData currentMarineData;
-//    private CurrentWaveData currentWaveData;
-//    private CurrentWaveUnits currentWaveUnits;
-//
-//    public ConditionsDTO(Spot spot, TidalEventDTO tidalEventDTO, CurrentMarineData currentMarineData, CurrentWaveData currentWaveData, CurrentWaveUnits currentWaveUnits) {
-//        this.spot = spot;
-//        this.tidalEventDTO = tidalEventDTO;
-//        this.currentMarineData = currentMarineData;
-//        this.currentWaveData = currentWaveData;
-//        this.currentWaveUnits = currentWaveUnits;
-//    }
+    public ConditionsDTO(Spot spot, CurrentMarineData currentMarineData, CurrentWeatherData currentWeatherData, TidalEvent tidalEventDTO) {
+        this.spot = spot;
+        this.currentMarineData = currentMarineData;
+        this.currentWeatherData = currentWeatherData;
+        this.tidalEventDTO = tidalEventDTO;
+    }
 }
