@@ -1,0 +1,16 @@
+
+
+Pulling from Repos
+    Don't need Spot - pull full data
+    Don't need AppUser - pull everything
+    TripDTO - need this to get specifics
+        - also build a custom repo query that gets spot/user specifics rather than ID
+
+
+
+Putting in Repos
+
+
+
+
+Editing Repos?

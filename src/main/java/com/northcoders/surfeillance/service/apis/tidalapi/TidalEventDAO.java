@@ -31,6 +31,7 @@ public class TidalEventDAO {
             var response = client.send(req, HttpResponse.BodyHandlers.ofString());
 
             List<TidalEvent> tidalEvents = om.readValue(response.body(), new TypeReference<List<TidalEvent>>() {});
+            // If this can convert and return a TidalEventDTO that would be useful (SB)
             return tidalEvents.getFirst();
         } catch(IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();

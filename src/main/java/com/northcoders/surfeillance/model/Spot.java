@@ -6,28 +6,27 @@ import lombok.*;
 
 @Entity
 @Getter
-@NoArgsConstructor
 public class Spot {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long spotId;
 
     @Setter
     @Column
     private String locationName;
 
     @Embedded
-    private Location location;
+    private Coordinate coordinate;
 
     @Setter
     @Column
-    private String tidestationId;
+    private String tideStationId;
 
-    public Spot(Long spotId, String locationName, Location location) {
-        this.id = spotId;
+    public Spot(long spotId, String locationName, Coordinate coordinate) {
+        this.spotId = spotId;
         this.locationName = locationName;
-        this.location = location;
+        this.coordinate = coordinate;
     }
 
 }
