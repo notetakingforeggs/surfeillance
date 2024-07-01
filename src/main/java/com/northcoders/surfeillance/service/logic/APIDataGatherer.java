@@ -5,7 +5,6 @@ import com.northcoders.surfeillance.service.apis.waveAPI.CurrentMarineData;
 import com.northcoders.surfeillance.service.apis.waveAPI.waveDAO.MarineConditionsDAO;
 import com.northcoders.surfeillance.service.apis.weatherAPI.CurrentWeatherData;
 import com.northcoders.surfeillance.service.apis.weatherAPI.weatherDAO.WindConditionsDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class APIDataGatherer {
 
