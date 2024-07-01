@@ -65,7 +65,7 @@ public class UserController {
         // create a new trip for a user based on some appropriate DTO
     }
 
-    @PutMapping(value = "/trips/{id}}")
+    @PutMapping(value = "/trips/{id}")
     public void updateTrip() {
 //    public void updateTrip(@RequestBody TripDTO tripDTO) {
         // Updates a trip's info

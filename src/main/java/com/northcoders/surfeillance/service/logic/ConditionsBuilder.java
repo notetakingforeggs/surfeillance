@@ -13,13 +13,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class ConditionsBuilder {
 
+    @Autowired
+    APIDataGatherer apiData;
+
 
     public ConditionsDTO conditionBuilder(Spot spot) {
+        return new ConditionsDTO(spot,
+                getMarineData(spot),
+                getWeatherData(spot),
+                getTidalEvent(spot));
+    }
 
-        CurrentMarineData currentMarineData = MarineConditionsDAO.getMarineCondition(spot.getCoordinate().getLatitude(), spot.getCoordinate().getLongitude());
-        CurrentWeatherData currentWeatherData = WindConditionsDAO.getWindCondition(spot.getCoordinate().getLatitude(), spot.getCoordinate().getLongitude());
-        TidalEvent tidalEvent = TidalEventDAO.getTideByLocation(spot.getTideStationId());
+    public CurrentMarineData getMarineData(Spot spot) {
+        return apiData.fetchMarineData(spot.getCoordinate());
+    }
 
-        return new ConditionsDTO(spot, currentMarineData, currentWeatherData, tidalEvent);
+    public CurrentWeatherData getWeatherData(Spot spot) {
+        return apiData.fetchWeather(spot.getCoordinate());
+    }
+
+    public TidalEvent getTidalEvent(Spot spot) {
+        return apiData.getTidalEvent(spot.getTideStationId());
     }
 }

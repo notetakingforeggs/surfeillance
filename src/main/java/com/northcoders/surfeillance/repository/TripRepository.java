@@ -15,11 +15,11 @@ public interface TripRepository extends CrudRepository<Trip, Integer> {
     // find a trip by ID
     // save()
 
-    // Returns a list of trips based on AppuserId in otder to populate a recyler view
+    // Returns a list of trips based on AppuserId in order to populate a recycler view
     List<Trip> findByUserId(long id);
 
     // Returns a list of trips based on a specific spot in order to calculate average ratings for a spot
-    List<Trip> findBySpotId(long id);
+    List<Trip> findBySpot_SpotId(long id);
 
     // For when all we want is the average we can let SQL deal with the calculation
     @Query("SELECT AVG(t.surfRating) FROM Trip t WHERE t.spot.id = :spotId")

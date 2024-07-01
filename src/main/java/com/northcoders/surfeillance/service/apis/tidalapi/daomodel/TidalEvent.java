@@ -1,9 +1,11 @@
 package com.northcoders.surfeillance.service.apis.tidalapi.daomodel;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 import java.util.Date;
 
+@Data
 public class TidalEvent {
     @JsonProperty("EventType")
     public String eventType;

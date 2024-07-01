@@ -51,7 +51,7 @@ class TripRepositoryTest {
     @Test
     void findBySpotId() {
         assertThat(tripRepository).isNotNull();
-        List<Trip> trips = tripRepository.findBySpotId(1L);
+        List<Trip> trips = tripRepository.findBySpot_SpotId(1L);
 
         assertThat(trips).isNotNull();
         assertThat(trips.size()).isEqualTo(5);

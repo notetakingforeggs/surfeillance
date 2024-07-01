@@ -23,10 +23,11 @@ public class Spot {
     @Column
     private String tideStationId;
 
-    public Spot(long spotId, String locationName, Coordinate coordinate) {
+    public Spot(long spotId, String locationName, Coordinate coordinate, String tideStationId) {
         this.spotId = spotId;
         this.locationName = locationName;
         this.coordinate = coordinate;
+        this.tideStationId = tideStationId;
     }
 
 }
