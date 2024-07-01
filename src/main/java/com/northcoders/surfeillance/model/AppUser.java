@@ -6,11 +6,16 @@ import lombok.*;
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long userId;
+    private Long id;
+
+    @Setter
+    @Column
+    private String userName;
 
     @Setter
     @Column
