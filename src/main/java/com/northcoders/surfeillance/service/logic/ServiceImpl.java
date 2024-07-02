@@ -5,9 +5,11 @@ import com.northcoders.surfeillance.model.dto.ConditionsDTO;
 import com.northcoders.surfeillance.repository.SpotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
+@org.springframework.stereotype.Service
 public class ServiceImpl implements Service{
 
     @Autowired

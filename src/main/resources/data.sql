@@ -1,11 +1,11 @@
 INSERT INTO spot
 (spot_id, location_name, latitude, longitude, tide_station_id)
 VALUES
-(1, 'Castle Haven Bay', -4.1925652, 54.8083162, 'ABC123'),
-(2, 'Kirkandrews Bay', -4.1885101, 54.8072633, 'ABC123'),
-(3, 'Unknown', -4.259116, 54.837657, 'ABC456'),
-(4, 'Ross Bay', -4.0919856, 54.7785707, 'ABC456'),
-(5, 'Ringdoo Sands', -4.8105347, 54.8492277, 'ABC789');
+(1, 'Castle Haven Bay', -4.1925652, 54.8083162, '0324'),
+(2, 'Kirkandrews Bay', -4.1885101, 54.8072633, '0324'),
+(3, 'Unknown', -4.259116, 54.837657, '0324'),
+(4, 'Ross Bay', -4.0919856, 54.7785707, '0324'),
+(5, 'Ringdoo Sands', -4.8105347, 54.8492277, '0324');
 
 
 INSERT INTO app_user

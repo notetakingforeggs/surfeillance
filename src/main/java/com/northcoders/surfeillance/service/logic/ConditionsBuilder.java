@@ -10,7 +10,9 @@ import com.northcoders.surfeillance.service.apis.waveAPI.waveDAO.MarineCondition
 import com.northcoders.surfeillance.service.apis.weatherAPI.CurrentWeatherData;
 import com.northcoders.surfeillance.service.apis.weatherAPI.weatherDAO.WindConditionsDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ConditionsBuilder {
 
     @Autowired

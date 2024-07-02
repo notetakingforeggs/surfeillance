@@ -9,6 +9,7 @@ import com.northcoders.surfeillance.service.apis.waveAPI.waveDAO.MarineCondition
 import com.northcoders.surfeillance.service.apis.weatherAPI.CurrentWeatherData;
 import com.northcoders.surfeillance.service.apis.weatherAPI.weatherDAO.WindConditionsDAO;
 
+@org.springframework.stereotype.Service
 public class APIDataGatherer {
 
     public CurrentWeatherData fetchWeather(Coordinate coordinate) {
