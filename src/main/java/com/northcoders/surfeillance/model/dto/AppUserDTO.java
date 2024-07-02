@@ -1,5 +1,6 @@
 package com.northcoders.surfeillance.model.dto;
 
+import com.northcoders.surfeillance.model.AppUser;
 import com.northcoders.surfeillance.model.SkillLevel;
 import lombok.Data;
 
@@ -9,7 +10,15 @@ public class AppUserDTO {
     private long id;
     private String username;
     private String profileText;
-    private String lcoation;
+    private String location;
     private SkillLevel skillLevel;
+
+    public AppUserDTO(AppUser appUser) {
+        this.id = appUser.getId();
+        this.username = appUser.getUserName();
+        this.profileText = appUser.getProfileText();
+        this.location = appUser.getLocation();
+        this.skillLevel = appUser.getSkillLevel();
+    }
 
 }
