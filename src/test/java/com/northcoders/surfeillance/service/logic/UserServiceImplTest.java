@@ -51,12 +51,13 @@ class UserServiceImplTest {
         assertNull(actualUserDTO);
     }
 
-
     @Test
-    void createUser() {
+    void createUserCreatesUserAndConfirms() {
     }
 
     @Test
-    void updateUpset() {
+    void createUserFailsToCreateAndConfirms() {
     }
+
+
 }

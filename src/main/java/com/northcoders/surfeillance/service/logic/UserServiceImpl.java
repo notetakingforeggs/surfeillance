@@ -26,12 +26,29 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean createUser(AppUser appUser) {
-        return false;
+    public AppUser createUser(AppUser appUser) {
+        return userRepository.save(appUser);
     }
 
+
     @Override
-    public boolean updateUpset(AppUser userUpdates) {
-        return false;
+    public boolean updateUpset(int id, AppUser userUpdates) {
+        if (!userRepository.existsById(id)) {
+            return false;
+        } else {
+            Optional<AppUser> optionalUserToUpdate = userRepository.findById(id);
+            if (optionalUserToUpdate.isEmpty()) return false;
+            AppUser updatedUser = optionalUserToUpdate.get();
+            applyUpdate(updatedUser, userUpdates);
+            userRepository.save(updatedUser);
+            return true;
+        }
+    }
+
+    private void applyUpdate(AppUser appUser, AppUser userUpdates) {
+        appUser.setUserName(userUpdates.getUserName());
+        appUser.setProfileText(userUpdates.getProfileText());
+        appUser.setLocation(userUpdates.getLocation());
+        appUser.setSkillLevel(userUpdates.getSkillLevel());
     }
 }
