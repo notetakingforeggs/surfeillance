@@ -71,19 +71,11 @@ class ServiceImplTest {
 
         ConditionsDTO conditionOne = new ConditionsDTO(
                 new Spot(1L, "The Beach", new Coordinate(0.5, 0.5), "ABC123"),
-                new CurrentMarineData(0.5, 0.5, "GMT", new CurrentWaveUnits("time", "seconds", "1.0", "SW", "0.5"),
-                        new CurrentWaveData("12:00", 2L, 5L, 4L, 1L)),
-                new CurrentWeatherData(0.5, 0.5, "GMT", 1.5, new CurrentWindUnits("12:00", "0.5", "4", "6", "10"),
-                        new CurrentWindData("12:00", 0.1, 1.5, 2.0, 3.1)),
-                new TidalEvent());
+                null, null,null);
 
         ConditionsDTO conditionTwo = new ConditionsDTO(
                 new Spot(2L, "Pebble Breach", new Coordinate(1.5, 1.5), "ABC456"),
-                new CurrentMarineData(0.7, 0.5, "UCT", new CurrentWaveUnits("time", "seconds", "1.0", "SW", "0.5"),
-                        new CurrentWaveData("12:30", 2L, 5L, 4L, 1L)),
-                new CurrentWeatherData(0.5, 0.5, "UCT", 1.5, new CurrentWindUnits("12:00", "0.5", "4", "6", "10"),
-                        new CurrentWindData("12:30", 0.1, 1.5, 2.0, 3.1)),
-                new TidalEvent());
+                null, null,null);
 
         when(conditionsBuilder.conditionBuilder(spotOne)).thenReturn(conditionOne);
         when(conditionsBuilder.conditionBuilder(spotTwo)).thenReturn(conditionTwo);
@@ -98,6 +90,7 @@ class ServiceImplTest {
         verify(mockIterator, times(3)).hasNext();
         verify(mockIterator, times(2)).next();
         verify(spotList, times(1)).iterator();
+
 
 
     }
