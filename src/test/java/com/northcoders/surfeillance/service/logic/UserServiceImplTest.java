@@ -52,11 +52,19 @@ class UserServiceImplTest {
     }
 
     @Test
-    void createUserCreatesUserAndConfirms() {
+    void createUserCreatesUser() {
+        when(userRepository.save(appUser)).thenReturn(appUser);
+
+        AppUser savedUser = userService.createUser(appUser);
+
+        verify(userRepository, times(1)).save(appUser);
+        assertNotNull(savedUser);
+        assertEquals("ste", savedUser.getUserName());
     }
 
     @Test
-    void createUserFailsToCreateAndConfirms() {
+    void updateUserUpdatesUserAndConfirms() {
+        
     }
 
 
