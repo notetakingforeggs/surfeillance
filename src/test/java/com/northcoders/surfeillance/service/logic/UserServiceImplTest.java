@@ -64,7 +64,25 @@ class UserServiceImplTest {
 
     @Test
     void updateUserUpdatesUserAndConfirms() {
-        
+        when(userRepository.existsById(1)).thenReturn(true);
+        when(userRepository.findById(1)).thenReturn(Optional.of(appUser));
+
+        boolean result = userService.updateUser(1, new AppUser());
+
+        assertTrue(result);
+        verify(userRepository, times(1)).existsById(1);
+        verify(userRepository, times(1)).save(any(AppUser.class));
+        verify(userRepository, times(1)).findById(1);
+
+    }
+
+    @Test
+    void updateUserCanNotUpdateDoesNotExist() {
+        when(userRepository.existsById(1)).thenReturn(false);
+        assertFalse(userService.updateUser(1, new AppUser()));
+        verify(userRepository, times(1)).existsById(1);
+        verify(userRepository, times(0)).save(any(AppUser.class));
+        verify(userRepository, times(0)).findById(1);
     }
 
 

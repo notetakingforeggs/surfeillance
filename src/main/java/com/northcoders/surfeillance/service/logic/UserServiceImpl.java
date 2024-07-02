@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public boolean updateUpset(int id, AppUser userUpdates) {
+    public boolean updateUser(int id, AppUser userUpdates) {
         if (!userRepository.existsById(id)) {
             return false;
         } else {

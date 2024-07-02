@@ -6,5 +6,5 @@ import com.northcoders.surfeillance.model.dto.AppUserDTO;
 public interface UserService {
     AppUserDTO getUserById(int id);
     AppUser createUser(AppUser appUser);
-    boolean updateUpset(int id, AppUser userUpdates);
+    boolean updateUser(int id, AppUser userUpdates);
 }
