@@ -5,7 +5,6 @@ import com.northcoders.surfeillance.model.dto.AppUserDTO;
 import com.northcoders.surfeillance.model.dto.NewUserDTO;
 import com.northcoders.surfeillance.service.logic.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
