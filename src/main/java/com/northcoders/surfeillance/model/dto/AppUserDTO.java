@@ -12,6 +12,9 @@ public class AppUserDTO {
     private String profileText;
     private String location;
     private SkillLevel skillLevel;
+    private String imageUrl;
+    private String email;
+    private String token;
 
     public AppUserDTO(AppUser appUser) {
         this.id = appUser.getId();
@@ -19,6 +22,9 @@ public class AppUserDTO {
         this.profileText = appUser.getProfileText();
         this.location = appUser.getLocation();
         this.skillLevel = appUser.getSkillLevel();
+        this.imageUrl = appUser.getImageUrl();
+        this.email = appUser.getEmail();
+        this.token = appUser.getToken();
     }
 
 }
