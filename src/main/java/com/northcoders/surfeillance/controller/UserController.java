@@ -25,12 +25,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-
-    @GetMapping(value = "/health")
-    public void getHealth() {
-        // Use Spring:Actuator to get a health endpoint
-    }
-
     @GetMapping(value = "/{id}")
     public ResponseEntity<AppUserDTO> getUserById(@PathVariable int id) {
         AppUserDTO user = userService.getUserById(id);
