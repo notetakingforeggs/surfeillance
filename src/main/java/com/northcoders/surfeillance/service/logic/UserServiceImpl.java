@@ -3,6 +3,7 @@ package com.northcoders.surfeillance.service.logic;
 import com.northcoders.surfeillance.model.AppUser;
 import com.northcoders.surfeillance.model.dto.AppUserDTO;
 import com.northcoders.surfeillance.model.dto.NewUserDTO;
+import com.northcoders.surfeillance.model.dto.UserUpdatesDTO;
 import com.northcoders.surfeillance.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,23 +39,24 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public boolean updateUser(int id, AppUser userUpdates) {
+    public AppUser updateUser(int id, UserUpdatesDTO userUpdates) {
         if (!userRepository.existsById(id)) {
-            return false;
+            return null;
         } else {
             Optional<AppUser> optionalUserToUpdate = userRepository.findById(id);
-            if (optionalUserToUpdate.isEmpty()) return false;
+            if (optionalUserToUpdate.isEmpty()) return null;
             AppUser updatedUser = optionalUserToUpdate.get();
             applyUpdate(updatedUser, userUpdates);
             userRepository.save(updatedUser);
-            return true;
+            return updatedUser;
         }
     }
 
-    private void applyUpdate(AppUser appUser, AppUser userUpdates) {
-        appUser.setUserName(userUpdates.getUserName());
-        appUser.setProfileText(userUpdates.getProfileText());
-        appUser.setLocation(userUpdates.getLocation());
-        appUser.setSkillLevel(userUpdates.getSkillLevel());
+    private void applyUpdate(AppUser appUser, UserUpdatesDTO userUpdates) {
+        if(userUpdates.getUserName() != null && !userUpdates.getUserName().isEmpty()) appUser.setUserName(userUpdates.getUserName());
+        if(userUpdates.getProfileText() != null && !userUpdates.getProfileText().isEmpty()) appUser.setProfileText(userUpdates.getProfileText());
+        if(userUpdates.getLocation() != null && !userUpdates.getLocation().isEmpty()) appUser.setLocation(userUpdates.getLocation());
+        if(userUpdates.getSkillLevel() != null) appUser.setSkillLevel(userUpdates.getSkillLevel());
+        if(userUpdates.getImageUrl() != null && !userUpdates.getImageUrl().isEmpty()) appUser.setImageUrl(userUpdates.getImageUrl());
     }
 }

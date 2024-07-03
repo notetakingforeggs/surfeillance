@@ -4,6 +4,7 @@ import com.northcoders.surfeillance.model.AppUser;
 import com.northcoders.surfeillance.model.SkillLevel;
 import com.northcoders.surfeillance.model.dto.AppUserDTO;
 import com.northcoders.surfeillance.model.dto.NewUserDTO;
+import com.northcoders.surfeillance.model.dto.UserUpdatesDTO;
 import com.northcoders.surfeillance.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -67,12 +68,15 @@ class UserServiceImplTest {
 
     @Test
     void updateUserUpdatesUserAndConfirms() {
+        UserUpdatesDTO updates = new UserUpdatesDTO("ste", "profile", "uk", null, "image.jpg", "email@email.com", "tokenString");
         when(userRepository.existsById(1)).thenReturn(true);
         when(userRepository.findById(1)).thenReturn(Optional.of(appUser));
+        System.out.println(appUser.toString());
+        System.out.println(updates);
 
-        boolean result = userService.updateUser(1, new AppUser());
+        AppUser result = userService.updateUser(1, updates);
 
-        assertTrue(result);
+        assertNotNull(result);
         verify(userRepository, times(1)).existsById(1);
         verify(userRepository, times(1)).save(any(AppUser.class));
         verify(userRepository, times(1)).findById(1);
@@ -82,7 +86,7 @@ class UserServiceImplTest {
     @Test
     void updateUserCanNotUpdateDoesNotExist() {
         when(userRepository.existsById(1)).thenReturn(false);
-        assertFalse(userService.updateUser(1, new AppUser()));
+        assertNull(userService.updateUser(1, new UserUpdatesDTO("", "", "", null, "", "", "")));
         verify(userRepository, times(1)).existsById(1);
         verify(userRepository, times(0)).save(any(AppUser.class));
         verify(userRepository, times(0)).findById(1);

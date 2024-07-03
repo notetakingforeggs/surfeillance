@@ -3,6 +3,7 @@ package com.northcoders.surfeillance.controller;
 import com.northcoders.surfeillance.model.AppUser;
 import com.northcoders.surfeillance.model.dto.AppUserDTO;
 import com.northcoders.surfeillance.model.dto.NewUserDTO;
+import com.northcoders.surfeillance.model.dto.UserUpdatesDTO;
 import com.northcoders.surfeillance.service.logic.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,10 +46,13 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public void updateUser() {
-//    public void updateUser(@RequestBody -UserDTO updatedUser) {
-        // Updates a user's profile (presumably from their profile page
-        // May or may not use the same DTO as create.
+    public ResponseEntity<AppUser> updateUser(@RequestBody UserUpdatesDTO userUpdates, @PathVariable int id) {
+        AppUser updatedUser = userService.updateUser(id, userUpdates);
+        if (updatedUser == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Update Failed");
+        } else {
+            return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
+        }
     }
 
     @GetMapping(value = "/trips", params="userid")

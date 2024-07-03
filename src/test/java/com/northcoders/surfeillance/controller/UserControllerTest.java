@@ -8,6 +8,7 @@ import com.northcoders.surfeillance.model.AppUser;
 import com.northcoders.surfeillance.model.SkillLevel;
 import com.northcoders.surfeillance.model.dto.AppUserDTO;
 import com.northcoders.surfeillance.model.dto.NewUserDTO;
+import com.northcoders.surfeillance.model.dto.UserUpdatesDTO;
 import com.northcoders.surfeillance.service.logic.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -109,10 +110,43 @@ class UserControllerTest {
         verify(mockService, times(1)).createUser(newUser);
     }
 
-//    @Test
-//    void updateUser() {
-//    }
-//
+    @Test
+    void updateUserShouldUpdateUser() throws Exception {
+        AppUser existingUser = new AppUser(1L, "ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "");
+        UserUpdatesDTO userUpdates = new UserUpdatesDTO("", "", "", null, "image.jpg", "email@email.co.uk", "tokenString");
+        AppUser updatedUser = new AppUser(1L, "ste", "surfer", "UK", SkillLevel.BEGINNER, "image.jpg", "email@email.co.uk", "tokenString");
+
+        when(mockService.updateUser(1, userUpdates)).thenReturn(updatedUser);
+
+        this.mockMvcController.perform(
+                MockMvcRequestBuilders.put("/api/v1/users/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(userUpdates)))
+                        .andExpect(MockMvcResultMatchers.status().isAccepted())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.imageUrl").value("image.jpg"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("email@email.co.uk"));
+
+        verify(mockService, times(1)).updateUser(1, userUpdates);
+    }
+
+    @Test
+    void updateUserShouldReportFailure() throws Exception {
+        UserUpdatesDTO userUpdates = new UserUpdatesDTO("", "", "", null, "image.jpg", "email@email.co.uk", "tokenString");
+
+        when(mockService.updateUser(1, userUpdates)).thenReturn(null);
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.put("/api/v1/users/1")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(mapper.writeValueAsString(userUpdates)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.status().reason("User Update Failed"));
+
+        verify(mockService, times(1)).updateUser(1, userUpdates);
+    }
+
+
+
 //    @Test
 //    void getTripsByUser() {
 //    }
