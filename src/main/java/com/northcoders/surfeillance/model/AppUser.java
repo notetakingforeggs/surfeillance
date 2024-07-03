@@ -28,4 +28,11 @@ public class AppUser {
     @Setter
     @Column
     private SkillLevel skillLevel;
+
+    public AppUser(String userName, String profileText, String location, SkillLevel skillLevel) {
+        this.userName = userName;
+        this.profileText = profileText;
+        this.location = location;
+        this.skillLevel = skillLevel;
+    }
 }

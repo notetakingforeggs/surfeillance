@@ -2,6 +2,7 @@ package com.northcoders.surfeillance.service.logic;
 
 import com.northcoders.surfeillance.model.AppUser;
 import com.northcoders.surfeillance.model.dto.AppUserDTO;
+import com.northcoders.surfeillance.model.dto.NewUserDTO;
 import com.northcoders.surfeillance.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public AppUser createUser(AppUser appUser) {
-        return userRepository.save(appUser);
+    public AppUser createUser(NewUserDTO newUser) {
+        return userRepository.save(new AppUser(
+                newUser.getUserName(),
+                newUser.getProfileText(),
+                newUser.getLocation(),
+                newUser.getSkillLevel()
+        ));
     }
 
 

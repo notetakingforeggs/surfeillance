@@ -3,6 +3,7 @@ package com.northcoders.surfeillance.service.logic;
 import com.northcoders.surfeillance.model.AppUser;
 import com.northcoders.surfeillance.model.SkillLevel;
 import com.northcoders.surfeillance.model.dto.AppUserDTO;
+import com.northcoders.surfeillance.model.dto.NewUserDTO;
 import com.northcoders.surfeillance.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ class UserServiceImplTest {
         AppUserDTO actualUserDTO = userService.getUserById(1);
         verify(userRepository, times(1)).findById(1);
         assertNotNull(actualUserDTO);
-        assertEquals("ste", actualUserDTO.getUsername());
+        assertEquals("ste", actualUserDTO.getUserName());
     }
 
     @Test
@@ -53,11 +54,13 @@ class UserServiceImplTest {
 
     @Test
     void createUserCreatesUser() {
-        when(userRepository.save(appUser)).thenReturn(appUser);
+        NewUserDTO newUser = new NewUserDTO("ste", "surfer", "UK", SkillLevel.BEGINNER);
 
-        AppUser savedUser = userService.createUser(appUser);
+        when(userRepository.save(any(AppUser.class))).thenReturn(appUser);
 
-        verify(userRepository, times(1)).save(appUser);
+        AppUser savedUser = userService.createUser(newUser);
+
+        verify(userRepository, times(1)).save(any(AppUser.class));
         assertNotNull(savedUser);
         assertEquals("ste", savedUser.getUserName());
     }

@@ -32,7 +32,7 @@ public class ConditionController {
     public ResponseEntity<List<ConditionsDTO>> getAllConditions() {
         List<ConditionsDTO> list = service.getConditions();
         if (list.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No content found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No content found");
         } else {
             return new ResponseEntity<>(list, HttpStatus.OK);
         }

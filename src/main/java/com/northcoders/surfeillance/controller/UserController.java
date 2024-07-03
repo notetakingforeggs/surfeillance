@@ -1,7 +1,15 @@
 package com.northcoders.surfeillance.controller;
 
+import com.northcoders.surfeillance.model.AppUser;
+import com.northcoders.surfeillance.model.dto.AppUserDTO;
+import com.northcoders.surfeillance.model.dto.NewUserDTO;
+import com.northcoders.surfeillance.service.logic.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("api/v1/users")
@@ -14,11 +22,9 @@ public class UserController {
     and doesn't cause us issues down the line
  */
 
+    @Autowired
+    UserService userService;
 
-//    @Autowired
-//    UserService userService;
-//    Some as of yet undefined service class will presumably
-//    be the main service class to each controller
 
     @GetMapping(value = "/health")
     public void getHealth() {
@@ -26,17 +32,23 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}")
-    public void getUserById(@PathVariable int id) {
-        // Get a single user by id
-                // auth issues aside
-        // To populate their profile page
+    public ResponseEntity<AppUserDTO> getUserById(@PathVariable int id) {
+        AppUserDTO user = userService.getUserById(id);
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        } else {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
     }
 
     @PostMapping(value = "/add")
-    public void createUser() {
-//        public void createUser(@RequestBody -UserDTO newUser) {
-        // Creates a new user after first time OAuth
-        // Need to define the DTO used and what shape it is.
+    public ResponseEntity<AppUser> createUser(@RequestBody NewUserDTO newUser) {
+        AppUser addedUser = userService.createUser(newUser);
+        if (addedUser == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "User creation failed");
+        } else {
+            return new ResponseEntity<>(addedUser, HttpStatus.CREATED);
+        }
     }
 
     @PutMapping(value = "/{id}")

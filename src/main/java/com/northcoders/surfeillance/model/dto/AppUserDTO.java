@@ -8,14 +8,14 @@ import lombok.Data;
 public class AppUserDTO {
 
     private long id;
-    private String username;
+    private String userName;
     private String profileText;
     private String location;
     private SkillLevel skillLevel;
 
     public AppUserDTO(AppUser appUser) {
         this.id = appUser.getId();
-        this.username = appUser.getUserName();
+        this.userName = appUser.getUserName();
         this.profileText = appUser.getProfileText();
         this.location = appUser.getLocation();
         this.skillLevel = appUser.getSkillLevel();

@@ -101,7 +101,7 @@ class ConditionsControllerTest {
 
         this.mockMvcController.perform(
                         MockMvcRequestBuilders.get("/api/v1/conditions"))
-                .andExpect(MockMvcResultMatchers.status().isNoContent())
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andExpect(MockMvcResultMatchers.status().reason("No content found"));
 
         verify(mockService, times(1)).getConditions();
