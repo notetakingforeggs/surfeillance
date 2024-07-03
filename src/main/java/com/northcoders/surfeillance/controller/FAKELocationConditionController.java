@@ -1,14 +1,10 @@
 package com.northcoders.surfeillance.controller;
 
 import com.northcoders.surfeillance.model.FakeLocation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,4 +24,10 @@ import java.util.List;
 
             return new ResponseEntity<>(locations, HttpStatus.OK);
         }
+        @PostMapping("/addfaketrip")
+        public ResponseEntity<HttpStatus> postFakeLocation(@RequestBody FakeLocation postFakeLocation) { // The @RequestBody annotation maps the JSON body of the HTTP POST request to the fakeLocation object
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+
     }

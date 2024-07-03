@@ -17,7 +17,7 @@ public class FakeLocation {
     Double wavePeriod;
     Double windSpeed;
     Double gusts;
-    Double highTideheight;
+    Double highTideHeight;
     String highTideTime;
     Double lowTideHeight;
     String lowTideTime;

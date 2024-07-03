@@ -1,8 +1,5 @@
 package com.northcoders.surfeillance.service.apis.tidalapi;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
