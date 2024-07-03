@@ -30,7 +30,7 @@ class UserServiceImplTest {
 
     @BeforeEach
     void setup() {
-        appUser = new AppUser(1L, "ste", "surfer", "UK", SkillLevel.BEGINNER);
+        appUser = new AppUser(1L, "ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "");
     }
 
     @Test
@@ -54,7 +54,7 @@ class UserServiceImplTest {
 
     @Test
     void createUserCreatesUser() {
-        NewUserDTO newUser = new NewUserDTO("ste", "surfer", "UK", SkillLevel.BEGINNER);
+        NewUserDTO newUser = new NewUserDTO("ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "");
 
         when(userRepository.save(any(AppUser.class))).thenReturn(appUser);
 

@@ -50,7 +50,7 @@ class UserControllerTest {
 
     @Test
     void getUserByIdReturnsUser() throws Exception {
-        AppUserDTO user = new AppUserDTO(new AppUser(1L, "ste", "surfer", "UK", SkillLevel.BEGINNER));
+        AppUserDTO user = new AppUserDTO(new AppUser(1L, "ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", ""));
 
         when(mockService.getUserById(1)).thenReturn(user);
 
@@ -77,8 +77,8 @@ class UserControllerTest {
 
     @Test
     void createUserCreatesUserAndConfirms() throws Exception {
-        NewUserDTO newUser = new NewUserDTO("ste", "surfer", "UK", SkillLevel.BEGINNER);
-        AppUser createdUser = new AppUser(1L, "ste", "surfer", "UK", SkillLevel.BEGINNER);
+        NewUserDTO newUser = new NewUserDTO("ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "");
+        AppUser createdUser = new AppUser(1L, "ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "");
 
         when(mockService.createUser(newUser)).thenReturn(createdUser);
 
@@ -95,7 +95,7 @@ class UserControllerTest {
 
     @Test
     void createUserDoesNotCreateUserAndConfirms() throws Exception {
-        NewUserDTO newUser = new NewUserDTO("ste", "surfer", "UK", SkillLevel.BEGINNER);
+        NewUserDTO newUser = new NewUserDTO("ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "");
 
         when(mockService.createUser(newUser)).thenReturn(null);
 

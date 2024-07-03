@@ -29,10 +29,32 @@ public class AppUser {
     @Column
     private SkillLevel skillLevel;
 
+    @Setter
+    @Column
+    private String imageUrl;
+
+    @Setter
+    @Column
+    private String email;
+
+    @Setter
+    @Column
+    private String token;
+
     public AppUser(String userName, String profileText, String location, SkillLevel skillLevel) {
         this.userName = userName;
         this.profileText = profileText;
         this.location = location;
         this.skillLevel = skillLevel;
+    }
+
+    public AppUser(String userName, String profileText, String location, SkillLevel skillLevel, String imageUrl, String email, String token) {
+        this.userName = userName;
+        this.profileText = profileText;
+        this.location = location;
+        this.skillLevel = skillLevel;
+        this.imageUrl = imageUrl;
+        this.email = email;
+        this.token = token;
     }
 }

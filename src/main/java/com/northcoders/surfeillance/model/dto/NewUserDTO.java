@@ -12,4 +12,7 @@ public class NewUserDTO {
     String profileText;
     String location;
     SkillLevel skillLevel;
+    String imageUrl;
+    String email;
+    String token;
 }
