@@ -25,8 +25,9 @@ import java.util.List;
             return new ResponseEntity<>(locations, HttpStatus.OK);
         }
         @PostMapping("/addfaketrip")
-        public ResponseEntity<HttpStatus> postFakeLocation(@RequestBody FakeLocation postFakeLocation) { // The @RequestBody annotation maps the JSON body of the HTTP POST request to the fakeLocation object
-            return new ResponseEntity<>(HttpStatus.OK);
+        public ResponseEntity<FakeLocation> postFakeLocation(@RequestBody FakeLocation postFakeLocation) { // The @RequestBody annotation maps the JSON body of the HTTP POST request to the fakeLocation object
+            System.out.println(postFakeLocation.toString());
+            return new ResponseEntity<FakeLocation>(postFakeLocation, HttpStatus.CREATED);
         }
 
 
