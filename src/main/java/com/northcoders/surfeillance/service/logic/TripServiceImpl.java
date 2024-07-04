@@ -1,5 +1,6 @@
 package com.northcoders.surfeillance.service.logic;
 
+import com.northcoders.surfeillance.model.AppUser;
 import com.northcoders.surfeillance.model.Trip;
 import com.northcoders.surfeillance.model.dto.NewTripDTO;
 import com.northcoders.surfeillance.model.dto.TripDTO;
@@ -8,6 +9,7 @@ import com.northcoders.surfeillance.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TripServiceImpl implements TripService{
@@ -39,7 +41,21 @@ public class TripServiceImpl implements TripService{
     }
 
     @Override
-    public Trip updateTrip(TripUpdatesDTO tripUpdates) {
-        return null;
+    public Trip updateTrip(int id, TripUpdatesDTO tripUpdates) {
+        if(!tripRepository.existsById(id)) {
+            return null;
+        } else {
+            Optional<Trip> optionalTripToUpdate = tripRepository.findById(id);
+            if (optionalTripToUpdate.isEmpty()) return null;
+            Trip updatedTrip = optionalTripToUpdate.get();
+            applyUpdate(updatedTrip, tripUpdates);
+            tripRepository.save(updatedTrip);
+            return updatedTrip;
+        }
+    }
+
+    private void applyUpdate(Trip trip, TripUpdatesDTO tripUpdates) {
+        if (tripUpdates.getInfoRating() != null) trip.setInfoRating(tripUpdates.getInfoRating());
+        if (tripUpdates.getSurfRating() != null) trip.setSurfRating(tripUpdates.getSurfRating());
     }
 }

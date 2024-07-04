@@ -10,6 +10,6 @@ import java.util.List;
 public interface TripService {
     List<TripDTO> getAllTripsByUser(int id);
     Trip createTrip(NewTripDTO newTrip);
-    Trip updateTrip(TripUpdatesDTO tripUpdates);
+    Trip updateTrip(int id, TripUpdatesDTO tripUpdates);
 
 }
