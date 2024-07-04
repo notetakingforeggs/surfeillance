@@ -1,5 +1,6 @@
 package com.northcoders.surfeillance.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -7,10 +8,7 @@ import com.northcoders.surfeillance.model.AppUser;
 import com.northcoders.surfeillance.model.SkillLevel;
 import com.northcoders.surfeillance.model.Spot;
 import com.northcoders.surfeillance.model.Trip;
-import com.northcoders.surfeillance.model.dto.AppUserDTO;
-import com.northcoders.surfeillance.model.dto.NewUserDTO;
-import com.northcoders.surfeillance.model.dto.TripDTO;
-import com.northcoders.surfeillance.model.dto.UserUpdatesDTO;
+import com.northcoders.surfeillance.model.dto.*;
 import com.northcoders.surfeillance.service.logic.TripService;
 import com.northcoders.surfeillance.service.logic.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -194,12 +192,91 @@ class UserControllerTest {
 
 
     @Test
-    void addTrip() {
+    void addTripAddsNewTrip() throws Exception{
+        NewTripDTO newTrip = new NewTripDTO(
+                new AppUser(1L, "ste", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
+                new Spot(),
+                LocalDate.now(),
+                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
+        Trip createdTrip = new Trip(1L,
+                new AppUser(1L, "ste", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
+                new Spot(),
+                LocalDate.now(),
+                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
+
+        when(mockTripService.createTrip(any(NewTripDTO.class))).thenReturn(createdTrip);
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.post("/api/v1/users/trips/add")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(mapper.writeValueAsString(newTrip)))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.waveDirection").value("NW"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.windSpeed").value(1.5));
+
+        verify(mockTripService, times(1)).createTrip(any(NewTripDTO.class));
     }
 
-    
+    @Test
+    void addTripFailsToAddTripAndConfirms() throws Exception {
+        NewTripDTO newTrip = new NewTripDTO(
+                new AppUser(1L, "ste", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
+                new Spot(),
+                LocalDate.now(),
+                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
 
-//    @Test
-//    void updateTrip() {
-//    }
+        when(mockTripService.createTrip(any(NewTripDTO.class))).thenReturn(null);
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.post("/api/v1/users/trips/add")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(mapper.writeValueAsString(newTrip)))
+                .andExpect(MockMvcResultMatchers.status().isNotAcceptable())
+                .andExpect(MockMvcResultMatchers.status().reason("Trip Creation Failed"));
+
+        verify(mockTripService, times(1)).createTrip(any(NewTripDTO.class));
+
+    }
+
+    @Test
+    void updateTripShouldUpdateTrip() throws Exception {
+        Trip existingTrip = new Trip(1L,
+                new AppUser(1L, "ste", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
+                new Spot(),
+                LocalDate.now(),
+                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
+        existingTrip.setSurfRating(3);
+        existingTrip.setInfoRating(4);
+        TripUpdatesDTO updates = new TripUpdatesDTO(3, 4);
+
+        when(mockTripService.updateTrip(1, updates)).thenReturn(existingTrip);
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.put("/api/v1/users/trips/1")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(mapper.writeValueAsString(updates)))
+                .andExpect(MockMvcResultMatchers.status().isAccepted())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.surfRating").value(3))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.infoRating").value(4));
+
+        verify(mockTripService, times(1)).updateTrip(1, updates);
+    }
+
+    @Test
+    void updateTripShouldReportFailure() throws Exception {
+        TripUpdatesDTO updates = new TripUpdatesDTO(3, 4);
+
+        when(mockTripService.updateTrip(1, updates)).thenReturn(null);
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.put("/api/v1/users/trips/1")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(mapper.writeValueAsString(updates)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.status().reason("Trip Update Failed"));
+
+        verify(mockTripService, times(1)).updateTrip(1, updates);
+    }
+
+
 }

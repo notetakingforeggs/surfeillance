@@ -1,10 +1,8 @@
 package com.northcoders.surfeillance.controller;
 
 import com.northcoders.surfeillance.model.AppUser;
-import com.northcoders.surfeillance.model.dto.AppUserDTO;
-import com.northcoders.surfeillance.model.dto.NewUserDTO;
-import com.northcoders.surfeillance.model.dto.TripDTO;
-import com.northcoders.surfeillance.model.dto.UserUpdatesDTO;
+import com.northcoders.surfeillance.model.Trip;
+import com.northcoders.surfeillance.model.dto.*;
 import com.northcoders.surfeillance.service.logic.TripService;
 import com.northcoders.surfeillance.service.logic.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +30,9 @@ public class UserController {
     @Autowired
     TripService tripService;
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<AppUserDTO> getUserById(@PathVariable int id) {
-        AppUserDTO user = userService.getUserById(id);
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<AppUserDTO> getUserById(@PathVariable int userId) {
+        AppUserDTO user = userService.getUserById(userId);
         if (user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         } else {
@@ -52,9 +50,9 @@ public class UserController {
         }
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<AppUser> updateUser(@RequestBody UserUpdatesDTO userUpdates, @PathVariable int id) {
-        AppUser updatedUser = userService.updateUser(id, userUpdates);
+    @PutMapping(value = "/{userId}")
+    public ResponseEntity<AppUser> updateUser(@RequestBody UserUpdatesDTO userUpdates, @PathVariable int userId) {
+        AppUser updatedUser = userService.updateUser(userId, userUpdates);
         if (updatedUser == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Update Failed");
         } else {
@@ -62,9 +60,9 @@ public class UserController {
         }
     }
 
-    @GetMapping(value = "/trips/{userid}")
-    public ResponseEntity<List<TripDTO>> getTripsByUser(@PathVariable int userid) {
-        List<TripDTO> tripList = tripService.getAllTripsByUser(userid);
+    @GetMapping(value = "/trips/{userId}")
+    public ResponseEntity<List<TripDTO>> getTripsByUser(@PathVariable int userId) {
+        List<TripDTO> tripList = tripService.getAllTripsByUser(userId);
         if(tripList.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No content found");
         } else {
@@ -72,18 +70,29 @@ public class UserController {
         }
     }
 
+    // For the below,
+    // MAKE SURE TO USE THE CORRECT DTO OBJECTS
+
     @PostMapping(value = "/trips/add")
-//    public void addTrip(@RequestBody TripDTO tripDTO) {
-    public void addTrip() {
-        // create a new trip for a user based on some appropriate DTO
+    public ResponseEntity<Trip> addTrip(@RequestBody NewTripDTO newTrip) {
+        Trip createdTrip = tripService.createTrip(newTrip);
+        if (createdTrip == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Trip Creation Failed");
+        } else {
+            return new ResponseEntity<>(createdTrip, HttpStatus.CREATED);
+        }
+
     }
 
-    @PutMapping(value = "/trips/{id}")
-    public void updateTrip() {
-//    public void updateTrip(@RequestBody TripDTO tripDTO) {
-        // Updates a trip's info
-        // primarily to add ratings
-        // May or may not use the same DTO as addTrip().
+    @PutMapping(value = "/trips/{userId}")
+    public ResponseEntity<Trip> updateTrip(@PathVariable int userId, @RequestBody TripUpdatesDTO tripUpdates) {
+        Trip updatedTrip = tripService.updateTrip(userId, tripUpdates);
+        if (updatedTrip == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Trip Update Failed");
+        } else {
+            return new ResponseEntity<>(updatedTrip, HttpStatus.ACCEPTED);
+        }
+
     }
 
 
