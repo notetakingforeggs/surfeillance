@@ -3,13 +3,17 @@ package com.northcoders.surfeillance.controller;
 import com.northcoders.surfeillance.model.AppUser;
 import com.northcoders.surfeillance.model.dto.AppUserDTO;
 import com.northcoders.surfeillance.model.dto.NewUserDTO;
+import com.northcoders.surfeillance.model.dto.TripDTO;
 import com.northcoders.surfeillance.model.dto.UserUpdatesDTO;
+import com.northcoders.surfeillance.service.logic.TripService;
 import com.northcoders.surfeillance.service.logic.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/users")
@@ -24,6 +28,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    TripService tripService;
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<AppUserDTO> getUserById(@PathVariable int id) {
@@ -55,17 +62,14 @@ public class UserController {
         }
     }
 
-    @GetMapping(value = "/trips", params="userid")
-    public void getTripsByUser(@RequestParam long userid) {
-        // Returns a list of all trips for a user
-        // In whatever shape is needed
-    }
-
-    @GetMapping(value = "/trips/{tripId}")
-    public void getTripById() {
-        // returns details of a specific trip
-        // might already have what we need from the above
-        // renders with the ability to edit if the trip belongs to the current user?
+    @GetMapping(value = "/trips/{userid}")
+    public ResponseEntity<List<TripDTO>> getTripsByUser(@PathVariable int userid) {
+        List<TripDTO> tripList = tripService.getAllTripsByUser(userid);
+        if(tripList.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No content found");
+        } else {
+            return new ResponseEntity<>(tripList, HttpStatus.OK);
+        }
     }
 
     @PostMapping(value = "/trips/add")

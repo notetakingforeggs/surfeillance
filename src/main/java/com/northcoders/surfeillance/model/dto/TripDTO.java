@@ -31,7 +31,7 @@ public class TripDTO {
         this.infoRating = trip.getInfoRating();
         this.date = trip.getDate();
         this.waveHeight = trip.getWaveHeight();
-        this.waveDirection = this.getWaveDirection();
+        this.waveDirection = trip.getWaveDirection();
         this.wavePeriod = trip.getWavePeriod();
         this.windSpeed = trip.getWindSpeed();
         this.windDirection = trip.getWindDirection();
