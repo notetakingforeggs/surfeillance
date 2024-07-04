@@ -8,7 +8,7 @@ import com.northcoders.surfeillance.model.dto.TripUpdatesDTO;
 import java.util.List;
 
 public interface TripService {
-    List<TripDTO> getAllTrips();
+    List<TripDTO> getAllTripsByUser(int id);
     Trip createTrip(NewTripDTO newTrip);
     Trip updateTrip(TripUpdatesDTO tripUpdates);
 
