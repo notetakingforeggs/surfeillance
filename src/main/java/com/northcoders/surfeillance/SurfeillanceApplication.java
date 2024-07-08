@@ -29,20 +29,28 @@ public class SurfeillanceApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(SurfeillanceApplication.class, args);
-
-		try {
-			FileInputStream refreshToken = new FileInputStream("src/main/resources/serviceAccountKey.json");
-			FirebaseOptions options = new FirebaseOptions.Builder()
-					.setCredentials(GoogleCredentials.fromStream(refreshToken))
-					.build();
-
-			FirebaseApp defaultApp = FirebaseApp.initializeApp(options);
-			logger.info("FIREBASE INIT",defaultApp.getName());
-
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		}
+//		System.out.println("one");
+//		try {
+//
+//			System.out.println("two");
+//
+//			FileInputStream refreshToken = new FileInputStream("src/main/resources/serviceAccountKey.json");
+//
+//			System.out.println("three");
+//
+//			FirebaseOptions options = new FirebaseOptions.Builder()
+//					.setCredentials(GoogleCredentials.fromStream(refreshToken))
+//					.build();
+//			System.out.println("four");
+//
+//
+//			FirebaseApp defaultApp = FirebaseApp.initializeApp(options);
+//			logger.info("FIREBASE INIT",defaultApp.getName());
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//
+//		}
 
 
 
