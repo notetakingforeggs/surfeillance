@@ -3,6 +3,7 @@ package com.northcoders.surfeillance.service.apis.tidalapi;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidalEvent;
+import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidesDTO;
 
 import java.io.IOException;
 import java.net.URI;
@@ -19,7 +20,7 @@ public class TidalEventDAO {
     static final String HEADER_KEY = config.getHeaderKey();
     static final String HEADER_VALUE = config.getHeaderVal();
 
-    public static TidalEvent getTideByLocation(String stationId){
+    public static TidesDTO getTideByLocation(String stationId){
         ObjectMapper om = new ObjectMapper();
         String url = String.format(BASE_URL, stationId);
         try {
@@ -32,7 +33,7 @@ public class TidalEventDAO {
 
             List<TidalEvent> tidalEvents = om.readValue(response.body(), new TypeReference<List<TidalEvent>>() {});
             // If this can convert and return a TidalEventDTO that would be useful (SB)
-            return tidalEvents.getFirst();
+            return TidesUtil.getForthComingTides(tidalEvents);
         } catch(IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
         }

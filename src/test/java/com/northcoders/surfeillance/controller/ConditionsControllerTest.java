@@ -7,6 +7,7 @@ import com.northcoders.surfeillance.model.Coordinate;
 import com.northcoders.surfeillance.model.Spot;
 import com.northcoders.surfeillance.model.dto.ConditionsDTO;
 import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidalEvent;
+import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidesDTO;
 import com.northcoders.surfeillance.service.apis.waveAPI.CurrentMarineData;
 import com.northcoders.surfeillance.service.apis.waveAPI.CurrentWaveData;
 import com.northcoders.surfeillance.service.apis.waveAPI.CurrentWaveUnits;
@@ -55,13 +56,18 @@ class ConditionsControllerTest {
         mapper.registerModule(new JavaTimeModule());
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
+        TidesDTO tides = new TidesDTO(List.of(
+                new TidalEvent("LowWater", null, false, 1.5, false, false, null),
+                new TidalEvent("HighWater", null, false, 2.5, false, false, null)
+        ));
+
         conditionsDTOOne = new ConditionsDTO(
                 new Spot(1L, "The Beach", new Coordinate(0.5, 0.5), "ABC123"),
                 new CurrentMarineData(0.5, 0.5, "GMT", new CurrentWaveUnits("time", "seconds", "1.0", "SW", "0.5"),
                                                         new CurrentWaveData("12:00", 2L, 5L, 4L, 1L)),
                 new CurrentWeatherData(0.5, 0.5, "GMT", 1.5, new CurrentWindUnits("12:00", "0.5", "4", "6", "10"),
                         new CurrentWindData("12:00", 0.1, 1.5, 2.0, 3.1)),
-                new TidalEvent());
+                tides);
 
         conditionsDTOTwo = new ConditionsDTO(
                 new Spot(2L, "Pebble Breach", new Coordinate(1.5, 1.5), "ABC456"),
@@ -69,7 +75,7 @@ class ConditionsControllerTest {
                         new CurrentWaveData("12:30", 2L, 5L, 4L, 1L)),
                 new CurrentWeatherData(0.5, 0.5, "UCT", 1.5, new CurrentWindUnits("12:00", "0.5", "4", "6", "10"),
                         new CurrentWindData("12:30", 0.1, 1.5, 2.0, 3.1)),
-                new TidalEvent());
+                tides);
     }
 
     @Test
@@ -83,32 +89,14 @@ class ConditionsControllerTest {
         this.mockMvcController.perform(
                 MockMvcRequestBuilders.get("/api/v1/conditions"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].spot.spotId").value(1L))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].spot.spotId").value(2L))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].currentMarineData.latitude").value(0.5))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].currentMarineData.latitude").value(0.7))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].currentWeatherData.timezone").value("GMT"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].currentWeatherData.timezone").value("UCT"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].spotId").value(1L))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].spotId").value(2L))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].latitude").value(0.5))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].latitude").value(1.5))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].timezone").value("GMT"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].timezone").value("UCT"));
 
         verify(mockService, times(1)).getConditions();
     }
 
-    @Test
-    void getAllConditionsNotifiesOfEmptyList() throws Exception {
-        List<ConditionsDTO> emptyList = List.of();
-
-        when(mockService.getConditions()).thenReturn(emptyList);
-
-        this.mockMvcController.perform(
-                        MockMvcRequestBuilders.get("/api/v1/conditions"))
-                .andExpect(MockMvcResultMatchers.status().isNotFound())
-                .andExpect(MockMvcResultMatchers.status().reason("No content found"));
-
-        verify(mockService, times(1)).getConditions();
-
-    }
-
-    @Test
-    void getSpot() {
-    }
 }

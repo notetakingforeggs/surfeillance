@@ -3,10 +3,13 @@ package com.northcoders.surfeillance.model.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.northcoders.surfeillance.model.Spot;
 import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidalEvent;
+import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidesDTO;
 import com.northcoders.surfeillance.service.apis.waveAPI.CurrentMarineData;
 import com.northcoders.surfeillance.service.apis.waveAPI.CurrentWaveData;
 import com.northcoders.surfeillance.service.apis.weatherAPI.CurrentWeatherData;
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 public class ConditionsDTO {
@@ -24,10 +27,12 @@ public class ConditionsDTO {
     Double windSpeed;
     Double windDirection;
     Double gusts;
-    Double highTideHeight;
+    Date lowTideTime;
     Double lowTideHeight;
+    Date highTideTime;
+    Double highTideHeight;
 
-    public ConditionsDTO(Spot spot, CurrentMarineData currentMarineData, CurrentWeatherData currentWeatherData, TidalEvent tidalEventDTO) {
+    public ConditionsDTO(Spot spot, CurrentMarineData currentMarineData, CurrentWeatherData currentWeatherData, TidesDTO tidesDTO) {
         this.spotId = spot.getSpotId();
         this.name = spot.getLocationName();
         this.details = spot.getLocationName() + " is a beautiful place to go for a surf";
@@ -41,7 +46,9 @@ public class ConditionsDTO {
         this.windSpeed = currentWeatherData.current().wind_speed_10m();
         this.windDirection = currentWeatherData.current().wind_direction_10m();
         this.gusts = currentWeatherData.current().wind_gusts_10m();
-        this.highTideHeight = tidalEventDTO.getHeight();
-        this.lowTideHeight = tidalEventDTO.getHeight();
+        this.lowTideTime = tidesDTO.getLowWaterTime();
+        this.lowTideHeight = tidesDTO.getLowWaterHeight();
+        this.highTideTime = tidesDTO.getHighWaterTime();
+        this.highTideHeight = tidesDTO.getHighWaterHeight();
     }
 }

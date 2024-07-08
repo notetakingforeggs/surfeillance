@@ -4,6 +4,7 @@ import com.northcoders.surfeillance.model.Coordinate;
 import com.northcoders.surfeillance.model.Spot;
 import com.northcoders.surfeillance.model.dto.ConditionsDTO;
 import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidalEvent;
+import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidesDTO;
 import com.northcoders.surfeillance.service.apis.waveAPI.CurrentMarineData;
 import com.northcoders.surfeillance.service.apis.weatherAPI.CurrentWeatherData;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -29,7 +32,7 @@ class ConditionsBuilderTest {
     CurrentMarineData mockMarineData;
 
     @Mock
-    TidalEvent mockTidalEvent;
+    TidesDTO mockTidesDTO;
 
     @Mock
     Spot spot;
@@ -72,15 +75,15 @@ class ConditionsBuilderTest {
 
     @Test
     void getTidalEventDataShouldGetTidalEventData() {
-        when(apiMock.getTidalEvent(anyString())).thenReturn(mockTidalEvent);
+        when(apiMock.getTidalEvent(anyString())).thenReturn(mockTidesDTO);
 
         when(spot.getTideStationId()).thenReturn("ABC123");
 
-        when(mockTidalEvent.getEventType()).thenReturn("HighTide");
+        when(mockTidesDTO.getLowWaterHeight()).thenReturn(1.5);
 
-        TidalEvent actualData = conditionsBuilder.getTidalEvent(spot);
+        TidesDTO actualData = conditionsBuilder.getTidalEvent(spot);
 
-        assertEquals("HighTide", actualData.getEventType());
+        assertEquals(1.5, actualData.getLowWaterHeight());
         verify(apiMock, times(1)).getTidalEvent(anyString());
     }
 

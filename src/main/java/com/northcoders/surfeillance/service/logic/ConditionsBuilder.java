@@ -4,6 +4,7 @@ import com.northcoders.surfeillance.model.Spot;
 import com.northcoders.surfeillance.model.dto.ConditionsDTO;
 import com.northcoders.surfeillance.service.apis.tidalapi.TidalEventDAO;
 import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidalEvent;
+import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidesDTO;
 import com.northcoders.surfeillance.service.apis.waveAPI.CurrentMarineData;
 import com.northcoders.surfeillance.service.apis.waveAPI.CurrentWaveData;
 import com.northcoders.surfeillance.service.apis.waveAPI.waveDAO.MarineConditionsDAO;
@@ -34,7 +35,7 @@ public class ConditionsBuilder {
         return apiData.fetchWeather(spot.getCoordinate());
     }
 
-    public TidalEvent getTidalEvent(Spot spot) {
+    public TidesDTO getTidalEvent(Spot spot) {
         return apiData.getTidalEvent(spot.getTideStationId());
     }
 }

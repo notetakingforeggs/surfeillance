@@ -5,6 +5,7 @@ import com.northcoders.surfeillance.model.Spot;
 import com.northcoders.surfeillance.model.dto.ConditionsDTO;
 import com.northcoders.surfeillance.repository.SpotRepository;
 import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidalEvent;
+import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidesDTO;
 import com.northcoders.surfeillance.service.apis.waveAPI.CurrentMarineData;
 import com.northcoders.surfeillance.service.apis.waveAPI.CurrentWaveData;
 import com.northcoders.surfeillance.service.apis.waveAPI.CurrentWaveUnits;
@@ -71,11 +72,21 @@ class ServiceImplTest {
 
         ConditionsDTO conditionOne = new ConditionsDTO(
                 new Spot(1L, "The Beach", new Coordinate(0.5, 0.5), "ABC123"),
-                null, null,null);
+                new CurrentMarineData(0.5, 0.5, "GMT", new CurrentWaveUnits("", "", "", "", ""), new CurrentWaveData("", 1L, 1L, 1L, 1L)),
+                new CurrentWeatherData(0.5, 0.5, "GMT", 1.5, new CurrentWindUnits("", "", "", "", ""), new CurrentWindData("", 0.5, 0.5, 0.5, 0.5)),
+                new TidesDTO(List.of(
+                        new TidalEvent("LowWater", null, true, 1.5, false, false, null),
+                        new TidalEvent("HighWater", null, true, 2.5, false, false, null)
+                )));
 
         ConditionsDTO conditionTwo = new ConditionsDTO(
                 new Spot(2L, "Pebble Breach", new Coordinate(1.5, 1.5), "ABC456"),
-                null, null,null);
+                new CurrentMarineData(0.5, 0.5, "GMT", new CurrentWaveUnits("", "", "", "", ""), new CurrentWaveData("", 1L, 1L, 1L, 1L)),
+                new CurrentWeatherData(0.5, 0.5, "GMT", 1.5, new CurrentWindUnits("", "", "", "", ""), new CurrentWindData("", 0.5, 0.5, 0.5, 0.5)),
+                new TidesDTO(List.of(
+                        new TidalEvent("LowWater", null, true, 1.5, false, false, null),
+                        new TidalEvent("HighWater", null, true, 2.5, false, false, null)
+                )));
 
         when(conditionsBuilder.conditionBuilder(spotOne)).thenReturn(conditionOne);
         when(conditionsBuilder.conditionBuilder(spotTwo)).thenReturn(conditionTwo);
