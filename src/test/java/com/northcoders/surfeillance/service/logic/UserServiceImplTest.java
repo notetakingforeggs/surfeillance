@@ -71,8 +71,6 @@ class UserServiceImplTest {
         UserUpdatesDTO updates = new UserUpdatesDTO("ste", "profile", "uk", null, "image.jpg", "email@email.com", "tokenString");
         when(userRepository.existsById(1)).thenReturn(true);
         when(userRepository.findById(1)).thenReturn(Optional.of(appUser));
-        System.out.println(appUser.toString());
-        System.out.println(updates);
 
         AppUser result = userService.updateUser(1, updates);
 

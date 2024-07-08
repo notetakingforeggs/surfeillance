@@ -76,5 +76,21 @@ public class Trip {
         this.date = date;
     }
 
+    public Trip(long id, AppUser user, Spot spot, LocalDate date, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, Integer gusts, Double tideHeight) {
+        this.tripId = id;
+        this.user = user;
+        this.spot = spot;
+        this.waveHeight = waveHeight;
+        this.waveDirection = waveDirection;
+        this.wavePeriod = wavePeriod;
+        this.windSpeed = windSpeed;
+        this.windDirection = windDirection;
+        this.gusts = gusts;
+        this.tideHeight = tideHeight;
+        this.date = date;
+    }
+
+
+
 
 }
