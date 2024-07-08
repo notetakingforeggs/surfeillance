@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class ConditionsDTO {
 
+    long spotId;
     String name;
     String details;
     String requestTime;
@@ -27,6 +28,7 @@ public class ConditionsDTO {
     Double lowTideHeight;
 
     public ConditionsDTO(Spot spot, CurrentMarineData currentMarineData, CurrentWeatherData currentWeatherData, TidalEvent tidalEventDTO) {
+        this.spotId = spot.getSpotId();
         this.name = spot.getLocationName();
         this.details = spot.getLocationName() + " is a beautiful place to go for a surf";
         this.requestTime = currentMarineData.current().time();
