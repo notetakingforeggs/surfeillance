@@ -37,7 +37,10 @@ public class TripServiceImpl implements TripService{
                     newTrip.getWindSpeed(),
                     newTrip.getWindDirection(),
                     newTrip.getGusts(),
-                    newTrip.getTideHeight()
+                    newTrip.getLowTideHeight(),
+                    newTrip.getHighTideHeight(),
+                    newTrip.getLowTideDate(),
+                    newTrip.getHighTideDate()
                 )
         );
     }

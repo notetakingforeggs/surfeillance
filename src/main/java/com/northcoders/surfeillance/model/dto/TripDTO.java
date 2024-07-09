@@ -2,9 +2,11 @@ package com.northcoders.surfeillance.model.dto;
 
 import com.northcoders.surfeillance.model.Spot;
 import com.northcoders.surfeillance.model.Trip;
+import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 public class TripDTO {
@@ -21,7 +23,10 @@ public class TripDTO {
     private Double windSpeed;
     private String windDirection;
     private Integer gusts;
-    private Double tideHeight;
+    private Double lowTideHeight;
+    private Double highTideHeight;
+    private Date lowTideDate;
+    private Date highTideDate;
 
     public TripDTO(Trip trip) {
         this.tripId = trip.getTripId();
@@ -36,7 +41,10 @@ public class TripDTO {
         this.windSpeed = trip.getWindSpeed();
         this.windDirection = trip.getWindDirection();
         this.gusts = trip.getGusts();
-        this.tideHeight = trip.getTideHeight();
+        this.lowTideHeight = trip.getLowTideHeight();
+        this.highTideHeight = trip.getHighTideHeight();
+        this.lowTideDate = trip.getLowTideDate();
+        this.highTideDate = trip.getHighTideDate();
     }
 
 

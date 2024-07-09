@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -21,4 +22,8 @@ public class NewTripDTO {
     private String windDirection;
     private Integer gusts;
     private Double tideHeight;
+    private Double lowTideHeight;
+    private Double highTideHeight;
+    private Date lowTideDate;
+    private Date highTideDate;
 }
