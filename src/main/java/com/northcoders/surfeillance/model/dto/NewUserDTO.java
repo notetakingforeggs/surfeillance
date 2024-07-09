@@ -15,4 +15,5 @@ public class NewUserDTO {
     String imageUrl;
     String email;
     String token;
+    String googleId;
 }
