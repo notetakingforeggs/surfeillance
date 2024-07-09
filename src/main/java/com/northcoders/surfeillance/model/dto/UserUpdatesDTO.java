@@ -13,8 +13,9 @@ public class UserUpdatesDTO {
     private String imageUrl;
     private String email;
     private String token;
+    private String googleId;
 
-    public UserUpdatesDTO(String userName, String profileText, String location, SkillLevel skillLevel, String imageUrl, String email, String token) {
+    public UserUpdatesDTO(String userName, String googleId, String profileText, String location, SkillLevel skillLevel, String imageUrl, String email, String token) {
         this.userName = userName;
         this.profileText = profileText;
         this.location = location;
@@ -22,5 +23,6 @@ public class UserUpdatesDTO {
         this.imageUrl = imageUrl;
         this.email = email;
         this.token = token;
+        this.googleId = googleId;
     }
 }

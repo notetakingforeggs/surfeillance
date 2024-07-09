@@ -33,7 +33,9 @@ public class UserServiceImpl implements UserService{
                 newUser.getUserName(),
                 newUser.getProfileText(),
                 newUser.getLocation(),
-                newUser.getSkillLevel()
+                newUser.getSkillLevel(),
+                newUser.getEmail(),
+                newUser.getGoogleId()
         ));
     }
 

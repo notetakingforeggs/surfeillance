@@ -31,7 +31,7 @@ class UserServiceImplTest {
 
     @BeforeEach
     void setup() {
-        appUser = new AppUser(1L, "ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "");
+        appUser = new AppUser(1L,"ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", "");
     }
 
     @Test
@@ -55,7 +55,7 @@ class UserServiceImplTest {
 
     @Test
     void createUserCreatesUser() {
-        NewUserDTO newUser = new NewUserDTO("ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "");
+        NewUserDTO newUser = new NewUserDTO("ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "", "");
 
         when(userRepository.save(any(AppUser.class))).thenReturn(appUser);
 
@@ -68,7 +68,7 @@ class UserServiceImplTest {
 
     @Test
     void updateUserUpdatesUserAndConfirms() {
-        UserUpdatesDTO updates = new UserUpdatesDTO("ste", "profile", "uk", null, "image.jpg", "email@email.com", "tokenString");
+        UserUpdatesDTO updates = new UserUpdatesDTO("ste","", "profile", "uk", null, "image.jpg", "email@email.com", "tokenString");
         when(userRepository.existsById(1)).thenReturn(true);
         when(userRepository.findById(1)).thenReturn(Optional.of(appUser));
 
@@ -84,7 +84,7 @@ class UserServiceImplTest {
     @Test
     void updateUserCanNotUpdateDoesNotExist() {
         when(userRepository.existsById(1)).thenReturn(false);
-        assertNull(userService.updateUser(1, new UserUpdatesDTO("", "", "", null, "", "", "")));
+        assertNull(userService.updateUser(1, new UserUpdatesDTO("","", "", "", null, "", "", "")));
         verify(userRepository, times(1)).existsById(1);
         verify(userRepository, times(0)).save(any(AppUser.class));
         verify(userRepository, times(0)).findById(1);

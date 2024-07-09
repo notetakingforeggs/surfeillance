@@ -60,12 +60,12 @@ class UserControllerTest {
 
         trips = new ArrayList<>();
         tripOne = new TripDTO(new Trip(1L,
-                new AppUser(1L, "ste", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
+                new AppUser(1L,"ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
                 1.0, "NW", 0.5, 1.5, "NE", 4, 1.1));
         tripTwo = new TripDTO(new Trip(2L,
-                new AppUser(1L, "ste", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
+                new AppUser(1L,"ste","QWERTY789",  "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
                 1.1, "NE", 0.5, 1.5, "NE", 4, 1.1));
@@ -75,7 +75,7 @@ class UserControllerTest {
 
     @Test
     void getUserByIdReturnsUser() throws Exception {
-        AppUserDTO user = new AppUserDTO(new AppUser(1L, "ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", ""));
+        AppUserDTO user = new AppUserDTO(new AppUser(1L,"ste", "ABCABC123", "surfer", "uk", SkillLevel.BEGINNER, "", "", ""));
 
         when(mockUserService.getUserById(1)).thenReturn(user);
 
@@ -102,8 +102,8 @@ class UserControllerTest {
 
     @Test
     void createUserCreatesUserAndConfirms() throws Exception {
-        NewUserDTO newUser = new NewUserDTO("ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "");
-        AppUser createdUser = new AppUser(1L, "ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "");
+        NewUserDTO newUser = new NewUserDTO("ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "", "ABCABC123");
+        AppUser createdUser = new AppUser("ste", "ABCABC123", "surfer", "uk", SkillLevel.BEGINNER, "", "", "");
 
         when(mockUserService.createUser(newUser)).thenReturn(createdUser);
 
@@ -120,7 +120,7 @@ class UserControllerTest {
 
     @Test
     void createUserDoesNotCreateUserAndConfirms() throws Exception {
-        NewUserDTO newUser = new NewUserDTO("ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "");
+        NewUserDTO newUser = new NewUserDTO("ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "", "ABC123");
 
         when(mockUserService.createUser(newUser)).thenReturn(null);
 
@@ -136,9 +136,9 @@ class UserControllerTest {
 
     @Test
     void updateUserShouldUpdateUser() throws Exception {
-        AppUser existingUser = new AppUser(1L, "ste", "surfer", "UK", SkillLevel.BEGINNER, "", "", "");
-        UserUpdatesDTO userUpdates = new UserUpdatesDTO("", "", "", null, "image.jpg", "email@email.co.uk", "tokenString");
-        AppUser updatedUser = new AppUser(1L, "ste", "surfer", "UK", SkillLevel.BEGINNER, "image.jpg", "email@email.co.uk", "tokenString");
+        AppUser existingUser = new AppUser(1L,"ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", "");
+        UserUpdatesDTO userUpdates = new UserUpdatesDTO("", "","", "", null, "image.jpg", "email@email.co.uk", "tokenString");
+        AppUser updatedUser = new AppUser(1L,"ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "image.jpg", "email@email.co.uk", "");
 
         when(mockUserService.updateUser(1, userUpdates)).thenReturn(updatedUser);
 
@@ -155,7 +155,7 @@ class UserControllerTest {
 
     @Test
     void updateUserShouldReportFailure() throws Exception {
-        UserUpdatesDTO userUpdates = new UserUpdatesDTO("", "", "", null, "image.jpg", "email@email.co.uk", "tokenString");
+        UserUpdatesDTO userUpdates = new UserUpdatesDTO("","", "", "", null, "image.jpg", "email@email.co.uk", "tokenString");
 
         when(mockUserService.updateUser(1, userUpdates)).thenReturn(null);
 
@@ -194,12 +194,12 @@ class UserControllerTest {
     @Test
     void addTripAddsNewTrip() throws Exception{
         NewTripDTO newTrip = new NewTripDTO(
-                new AppUser(1L, "ste", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
+                new AppUser("ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
                 1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
         Trip createdTrip = new Trip(1L,
-                new AppUser(1L, "ste", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
+                new AppUser("ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
                 1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
@@ -220,7 +220,7 @@ class UserControllerTest {
     @Test
     void addTripFailsToAddTripAndConfirms() throws Exception {
         NewTripDTO newTrip = new NewTripDTO(
-                new AppUser(1L, "ste", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
+                new AppUser("ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
                 1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
@@ -241,7 +241,7 @@ class UserControllerTest {
     @Test
     void updateTripShouldUpdateTrip() throws Exception {
         Trip existingTrip = new Trip(1L,
-                new AppUser(1L, "ste", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
+                new AppUser("ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
                 1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);

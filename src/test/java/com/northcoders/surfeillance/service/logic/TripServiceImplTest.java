@@ -41,12 +41,12 @@ class TripServiceImplTest {
     @BeforeEach
     void setup() {
         tripOne = new Trip(1L,
-                new AppUser(1L, "ste", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
+                new AppUser(1L,"ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
                 1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
         tripTwo = new Trip(2L,
-                new AppUser(1L, "ste", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
+                new AppUser(1L,"ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
                 1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
@@ -54,7 +54,7 @@ class TripServiceImplTest {
         trips.add(tripOne);
         trips.add(tripTwo);
         newTrip = new NewTripDTO(
-                new AppUser(1L, "ste", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
+                new AppUser(1L,"ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
                 1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);

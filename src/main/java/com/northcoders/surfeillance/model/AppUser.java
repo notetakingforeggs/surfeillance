@@ -45,11 +45,13 @@ public class AppUser {
     @Column
     private String token;
 
-    public AppUser(String userName, String profileText, String location, SkillLevel skillLevel) {
+    public AppUser(String userName, String profileText, String location, SkillLevel skillLevel, String email, String googleId) {
         this.userName = userName;
         this.profileText = profileText;
         this.location = location;
         this.skillLevel = skillLevel;
+        this.email = email;
+        this.googleId = googleId;
     }
 
     public AppUser(String userName, String profileText, String location, SkillLevel skillLevel, String imageUrl, String email, String token) {
