@@ -21,7 +21,7 @@ public class NewTripDTO {
     private Double windSpeed;
     private String windDirection;
     private Integer gusts;
-    private Double tideHeight;
+
     private Double lowTideHeight;
     private Double highTideHeight;
     private Date lowTideDate;

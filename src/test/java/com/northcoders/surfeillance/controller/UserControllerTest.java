@@ -63,12 +63,12 @@ class UserControllerTest {
                 new AppUser(1L,"ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
-                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1));
+                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1, 3.1, null, null));
         tripTwo = new TripDTO(new Trip(2L,
                 new AppUser(1L,"ste","QWERTY789",  "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
-                1.1, "NE", 0.5, 1.5, "NE", 4, 1.1));
+                1.1, "NE", 0.5, 1.5, "NE", 4, 1.1, 3.7, null, null));
         trips.add(tripOne);
         trips.add(tripTwo);
     }
@@ -197,12 +197,12 @@ class UserControllerTest {
                 new AppUser("ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
-                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
+                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1, 3.7, null, null);
         Trip createdTrip = new Trip(1L,
                 new AppUser("ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
-                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
+                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1, 3.7, null, null);
 
         when(mockTripService.createTrip(any(NewTripDTO.class))).thenReturn(createdTrip);
 
@@ -223,7 +223,7 @@ class UserControllerTest {
                 new AppUser("ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
-                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
+                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1, 3.7, null, null);
 
         when(mockTripService.createTrip(any(NewTripDTO.class))).thenReturn(null);
 
@@ -244,7 +244,7 @@ class UserControllerTest {
                 new AppUser("ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
-                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
+                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1, 3.7, null, null);
         existingTrip.setSurfRating(3);
         existingTrip.setInfoRating(4);
         TripUpdatesDTO updates = new TripUpdatesDTO(3, 4);

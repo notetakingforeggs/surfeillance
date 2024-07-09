@@ -44,12 +44,12 @@ class TripServiceImplTest {
                 new AppUser(1L,"ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
-                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
+                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1, 3.7, null, null);
         tripTwo = new Trip(2L,
                 new AppUser(1L,"ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
-                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
+                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1, 3.7, null, null);
         trips = new ArrayList<>();
         trips.add(tripOne);
         trips.add(tripTwo);
@@ -57,7 +57,7 @@ class TripServiceImplTest {
                 new AppUser(1L,"ste", "ABCABC123", "a surfer", "uk", SkillLevel.BEGINNER, "", "", ""),
                 new Spot(),
                 LocalDate.now(),
-                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1);
+                1.0, "NW", 0.5, 1.5, "NE", 4, 1.1, 3.7, null, null);
     }
 
     @Test
