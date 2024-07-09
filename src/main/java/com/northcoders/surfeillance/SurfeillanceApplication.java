@@ -3,8 +3,12 @@ package com.northcoders.surfeillance;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.northcoders.surfeillance.model.dto.ConditionsDTO;
+import com.northcoders.surfeillance.repository.SpotRepository;
 import com.northcoders.surfeillance.service.apis.tidalapi.TidalEventDAO;
 import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidalEvent;
+import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidesDTO;
+import com.northcoders.surfeillance.service.logic.ServiceImpl;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -29,29 +34,13 @@ public class SurfeillanceApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(SurfeillanceApplication.class, args);
-//		System.out.println("one");
-//		try {
-//
-//			System.out.println("two");
-//
-//			FileInputStream refreshToken = new FileInputStream("src/main/resources/serviceAccountKey.json");
-//
-//			System.out.println("three");
-//
-//			FirebaseOptions options = new FirebaseOptions.Builder()
-//					.setCredentials(GoogleCredentials.fromStream(refreshToken))
-//					.build();
-//			System.out.println("four");
-//
-//
-//			FirebaseApp defaultApp = FirebaseApp.initializeApp(options);
-//			logger.info("FIREBASE INIT",defaultApp.getName());
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//
-//		}
 
+		TidesDTO tides = TidalEventDAO.getTideByLocation("0265");
+
+//		ServiceImpl service = new ServiceImpl();
+//		List<ConditionsDTO> conditions = service.getConditions();
+//
+		System.out.println(tides);
 
 
 
