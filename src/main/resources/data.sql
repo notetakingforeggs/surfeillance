@@ -114,7 +114,7 @@ VALUES
 (4, 'Jonah', 'UK', 'Quite the surfer', 2, 'jonah@gmail.com')
 ON CONFLICT (id) DO NOTHING;
 
-INSERT INTO trip (trip_id, info_rating, surf_rating, spot_id, user_id, gusts, tide_height, wave_direction, wave_height, wave_period, wind_direction, wind_speed, low_tide_height, high_tide_height, high_tide_date, low_tide_date)
+INSERT INTO trip (trip_id, info_rating, surf_rating, spot_id, user_id, gusts, wave_direction, wave_height, wave_period, wind_direction, wind_speed, low_tide_height, high_tide_height, high_tide_date, low_tide_date)
 VALUES
 (1, 3, 4, 3, 2, 1.8, 2.2, 'NW', 1.7, 2.1, 'NE', 2.8, 1.9, 2.9, '2024-07-11T03:21:00', '2024-07-11T09:21:00'),
 (2, 5, 2, 1, 3, 2.5, 1.5, 'SE', 2.2, 2.5, 'S', 3.0, 2.1, 2.8, '2024-07-11T05:21:00', '2024-07-11T11:21:00'),
