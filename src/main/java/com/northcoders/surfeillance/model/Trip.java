@@ -8,6 +8,7 @@ import org.hibernate.annotations.JoinColumnOrFormula;
 
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -60,10 +61,19 @@ public class Trip {
     private Integer gusts;
 
     @Column
-    private Double tideHeight;
+    private Double lowTideHeight;
+
+    @Column
+    private Double highTideHeight;
+
+    @Column
+    private Date lowTideDate;
+
+    @Column
+    private Date highTideDate;
 
 
-    public Trip(AppUser user, Spot spot, LocalDate date, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, Integer gusts, Double tideHeight) {
+    public Trip(AppUser user, Spot spot, LocalDate date, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, Integer gusts, Double lowTideHeight, Double highTideHeight, Date lowTideDate, Date highTideDate) {
         this.user = user;
         this.spot = spot;
         this.waveHeight = waveHeight;
@@ -72,11 +82,14 @@ public class Trip {
         this.windSpeed = windSpeed;
         this.windDirection = windDirection;
         this.gusts = gusts;
-        this.tideHeight = tideHeight;
+        this.lowTideHeight = lowTideHeight;
+        this.highTideHeight = highTideHeight;
+        this.lowTideDate = lowTideDate;
+        this.highTideDate = highTideDate;
         this.date = date;
     }
 
-    public Trip(long id, AppUser user, Spot spot, LocalDate date, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, Integer gusts, Double tideHeight) {
+    public Trip(long id, AppUser user, Spot spot, LocalDate date, Double waveHeight, String waveDirection, Double wavePeriod, Double windSpeed, String windDirection, Integer gusts, Double lowTideHeight, Double highTideHeight, Date lowTideDate, Date highTideDate) {
         this.tripId = id;
         this.user = user;
         this.spot = spot;
@@ -86,7 +99,10 @@ public class Trip {
         this.windSpeed = windSpeed;
         this.windDirection = windDirection;
         this.gusts = gusts;
-        this.tideHeight = tideHeight;
+        this.lowTideHeight = lowTideHeight;
+        this.highTideHeight = highTideHeight;
+        this.lowTideDate = lowTideDate;
+        this.highTideDate = highTideDate;
         this.date = date;
     }
 
