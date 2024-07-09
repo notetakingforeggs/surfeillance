@@ -31,11 +31,13 @@ public class UserServiceImpl implements UserService{
     public AppUser createUser(NewUserDTO newUser) {
         return userRepository.save(new AppUser(
                 newUser.getUserName(),
+                newUser.getGoogleId(),
                 newUser.getProfileText(),
                 newUser.getLocation(),
                 newUser.getSkillLevel(),
+                newUser.getImageUrl(),
                 newUser.getEmail(),
-                newUser.getGoogleId()
+                newUser.getToken()
         ));
     }
 
