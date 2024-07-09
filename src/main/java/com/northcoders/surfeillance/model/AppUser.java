@@ -19,6 +19,10 @@ public class AppUser {
 
     @Setter
     @Column
+    private String googleId;
+
+    @Setter
+    @Column
     private String profileText;
 
     @Setter
@@ -50,6 +54,17 @@ public class AppUser {
 
     public AppUser(String userName, String profileText, String location, SkillLevel skillLevel, String imageUrl, String email, String token) {
         this.userName = userName;
+        this.profileText = profileText;
+        this.location = location;
+        this.skillLevel = skillLevel;
+        this.imageUrl = imageUrl;
+        this.email = email;
+        this.token = token;
+    }
+
+    public AppUser(String userName, String googleId, String profileText, String location, SkillLevel skillLevel, String imageUrl, String email, String token) {
+        this.userName = userName;
+        this.googleId = googleId;
         this.profileText = profileText;
         this.location = location;
         this.skillLevel = skillLevel;
