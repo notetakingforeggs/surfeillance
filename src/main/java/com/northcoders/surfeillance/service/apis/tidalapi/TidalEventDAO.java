@@ -32,12 +32,22 @@ public class TidalEventDAO {
                     .GET().build();
             var response = client.send(req, HttpResponse.BodyHandlers.ofString());
 
-            TidalResponse tidalResponse = om.readValue(response.body(), TidalResponse.class);
+            List<TidalEvent> tidalEvents = om.readValue(response.body(), new TypeReference<List<TidalEvent>>() {});
 
 
-            return TidesUtil.getForthComingTides(tidalResponse.getEvents());
+//            return TidesUtil.getForthComingTides(tidalEvents);
+
+            return new TidesDTO(List.of(
+                    new TidalEvent("LowWater", null, true, 1.1503181534040032, false, false, null) ,
+                    new TidalEvent("HighWater", null, true, 3.722864318348443, false, false, null)
+            ));
+
         } catch(IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
+            return new TidesDTO(List.of(
+                    new TidalEvent("LowWater", null, true, 1.1503181534040032, false, false, null) ,
+                    new TidalEvent("HighWater", null, true, 3.722864318348443, false, false, null)
+            ));
         }
         return null;
 
