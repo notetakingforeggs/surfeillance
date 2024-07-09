@@ -49,7 +49,7 @@ public class TidalEventDAO {
                     new TidalEvent("HighWater", null, true, 3.722864318348443, false, false, null)
             ));
         }
-        return null;
+        
 
     }
 }
