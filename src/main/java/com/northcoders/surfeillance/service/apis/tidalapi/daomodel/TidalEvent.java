@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public class TidalEvent {
     @JsonProperty("EventType")
@@ -27,13 +26,13 @@ public class TidalEvent {
     @JsonProperty("Date")
     public Date date;
 
-//    public TidalEvent(String eventType, Date dateTime, boolean isApproximateTime, double height, boolean isApproximateHeight, boolean filtered, Date date) {
-//        this.eventType = eventType;
-//        this.dateTime = dateTime;
-//        this.isApproximateTime = isApproximateTime;
-//        this.height = height;
-//        this.isApproximateHeight = isApproximateHeight;
-//        this.filtered = filtered;
-//        this.date = date;
-//    }
+    public TidalEvent(String eventType, Date dateTime, boolean isApproximateTime, double height, boolean isApproximateHeight, boolean filtered, Date date) {
+        this.eventType = eventType;
+        this.dateTime = dateTime;
+        this.isApproximateTime = isApproximateTime;
+        this.height = height;
+        this.isApproximateHeight = isApproximateHeight;
+        this.filtered = filtered;
+        this.date = date;
+    }
 }

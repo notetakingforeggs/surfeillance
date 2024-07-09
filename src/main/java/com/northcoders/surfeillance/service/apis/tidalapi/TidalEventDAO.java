@@ -3,6 +3,7 @@ package com.northcoders.surfeillance.service.apis.tidalapi;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidalEvent;
+import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidalResponse;
 import com.northcoders.surfeillance.service.apis.tidalapi.daomodel.TidesDTO;
 
 import java.io.IOException;
@@ -31,10 +32,10 @@ public class TidalEventDAO {
                     .GET().build();
             var response = client.send(req, HttpResponse.BodyHandlers.ofString());
 
-            List<TidalEvent> tidalEvents = om.readValue(response.body(), new TypeReference<List<TidalEvent>>() {});
+            TidalResponse tidalResponse = om.readValue(response.body(), TidalResponse.class);
 
 
-            return TidesUtil.getForthComingTides(tidalEvents);
+            return TidesUtil.getForthComingTides(tidalResponse.getEvents());
         } catch(IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
         }
