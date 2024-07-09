@@ -1,7 +1,10 @@
 package com.northcoders.surfeillance.service.apis.tidalapi.daomodel;
 
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
 public class TidalResponse {
     List<TidalEvent> events;
 
@@ -11,7 +14,4 @@ public class TidalResponse {
 
     private TidalResponse() {}
 
-    public List<TidalEvent> getEvents() {
-        return events;
-    }
 }
