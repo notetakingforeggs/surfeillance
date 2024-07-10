@@ -38,6 +38,16 @@ public class UserController {
         } else {
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
+
+
+    }    @GetMapping(value = "/email/{email}")
+    public ResponseEntity<AppUserDTO> findByEmail(@PathVariable String email) {
+        AppUserDTO user = userService.findByEmail(email);
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        } else {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
     }
 
     @PostMapping(value = "/add")

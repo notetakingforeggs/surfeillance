@@ -6,6 +6,7 @@ import com.northcoders.surfeillance.model.dto.NewUserDTO;
 import com.northcoders.surfeillance.model.dto.UserUpdatesDTO;
 
 public interface UserService {
+    AppUserDTO findByEmail(String email);
     AppUserDTO getUserById(int id);
     AppUser createUser(NewUserDTO newUser);
     AppUser updateUser(int id, UserUpdatesDTO userUpdates);

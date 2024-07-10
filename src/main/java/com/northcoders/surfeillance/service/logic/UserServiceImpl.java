@@ -16,6 +16,12 @@ public class UserServiceImpl implements UserService{
     @Autowired
     UserRepository userRepository;
 
+
+    @Override
+    public AppUserDTO findByEmail(String email) {
+         return userRepository.findByEmail(email);
+    }
+
     @Override
     public AppUserDTO getUserById(int id) {
         Optional<AppUser> optionalUser = userRepository.findById(id);
