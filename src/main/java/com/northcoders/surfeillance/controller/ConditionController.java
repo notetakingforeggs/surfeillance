@@ -1,6 +1,7 @@
 package com.northcoders.surfeillance.controller;
 
 import com.northcoders.surfeillance.model.dto.ConditionsDTO;
+import com.northcoders.surfeillance.service.logic.ConditionsSupplier;
 import com.northcoders.surfeillance.service.logic.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,12 +31,13 @@ public class ConditionController {
 
     @GetMapping
     public ResponseEntity<List<ConditionsDTO>> getAllConditions() {
-        List<ConditionsDTO> list = service.getConditions();
-        if (list.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No content found");
-        } else {
-            return new ResponseEntity<>(list, HttpStatus.OK);
-        }
+        // List<ConditionsDTO> list = service.getConditions();
+//        if (list.isEmpty()) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No content found");
+//        } else {
+//            return new ResponseEntity<>(list, HttpStatus.OK);
+//        }
+        return new ResponseEntity<>(ConditionsSupplier.conditions.get(), HttpStatus.OK);
     }
 
     @GetMapping(value ="/{id}")

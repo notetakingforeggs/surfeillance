@@ -51,4 +51,25 @@ public class ConditionsDTO {
         this.highTideTime = tidesDTO.getHighWaterTime();
         this.highTideHeight = tidesDTO.getHighWaterHeight();
     }
+
+    public ConditionsDTO(long spotId, String name, String details, String requestTime, Double latitude, Double longitude, String timezone, Long waveHeight, Long waveDirection, Long wavePeriod, Double windSpeed, Double windDirection, Double gusts, Date lowTideTime, Double lowTideHeight, Date highTideTime, Double highTideHeight) {
+        this.spotId = spotId;
+        this.name = name;
+        this.details = details;
+        this.requestTime = requestTime;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.timezone = timezone;
+        this.waveHeight = waveHeight;
+        this.waveDirection = waveDirection;
+        this.wavePeriod = wavePeriod;
+        this.windSpeed = windSpeed;
+        this.windDirection = windDirection;
+        this.gusts = gusts;
+        this.lowTideTime = lowTideTime;
+        this.lowTideHeight = lowTideHeight;
+        this.highTideTime = highTideTime;
+        this.highTideHeight = highTideHeight;
+    }
 }
+
