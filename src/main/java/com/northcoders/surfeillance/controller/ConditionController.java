@@ -31,13 +31,16 @@ public class ConditionController {
 
     @GetMapping
     public ResponseEntity<List<ConditionsDTO>> getAllConditions() {
-        // List<ConditionsDTO> list = service.getConditions();
-//        if (list.isEmpty()) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No content found");
-//        } else {
-//            return new ResponseEntity<>(list, HttpStatus.OK);
-//        }
-        return new ResponseEntity<>(ConditionsSupplier.conditions.get(), HttpStatus.OK);
+        System.out.println("get conditions accessed");
+         List<ConditionsDTO> list = service.getConditions();
+        if (list.isEmpty()) {
+            System.out.println("error on get conditions");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No content found");
+        } else {
+            System.out.println("returning");
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
+//        return new ResponseEntity<>(ConditionsSupplier.conditions.get(), HttpStatus.OK);
     }
 
     @GetMapping(value ="/{id}")

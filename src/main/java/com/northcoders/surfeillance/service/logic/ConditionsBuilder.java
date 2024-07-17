@@ -28,14 +28,18 @@ public class ConditionsBuilder {
     }
 
     public CurrentMarineData getMarineData(Spot spot) {
+        System.out.println("trying to fetch marine data");
         return apiData.fetchMarineData(spot.getCoordinate());
     }
 
     public CurrentWeatherData getWeatherData(Spot spot) {
+        System.out.println("trying to fetch weather data");
         return apiData.fetchWeather(spot.getCoordinate());
     }
 
     public TidesDTO getTidalEvent(Spot spot) {
+
+        System.out.println("trying to fetch tidal data");
         return apiData.getTidalEvent(spot.getTideStationId());
     }
 }

@@ -1,8 +1,6 @@
 package com.northcoders.surfeillance;
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
+
 import com.northcoders.surfeillance.model.dto.ConditionsDTO;
 import com.northcoders.surfeillance.repository.SpotRepository;
 import com.northcoders.surfeillance.service.apis.tidalapi.TidalEventDAO;
