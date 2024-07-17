@@ -25,7 +25,7 @@ public class FirebaseConfig {
     @PostConstruct
     public void init() {
         try {
-            FileInputStream serviceAccount =  new FileInputStream("src/main/resources/serviceAccountKey.json");
+            FileInputStream serviceAccount =  new FileInputStream("/home/jonah/Desktop/surfeillance/backend/surfeillance/src/main/resources/serviceAccountKey.json");
 //            ClassPathResource resource = new ClassPathResource(configPath);
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))

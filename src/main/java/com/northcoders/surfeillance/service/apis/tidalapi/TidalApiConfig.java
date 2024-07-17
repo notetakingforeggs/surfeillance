@@ -16,7 +16,8 @@ public class TidalApiConfig {
     public TidalApiConfig() {
         properties = new Properties();
 
-        String configFilePath = "src/main/resources//application.properties";
+        //String configFilePath = "src/main/resources//application.properties";
+        String configFilePath = "/home/jonah/Desktop/surfeillance/backend/surfeillance/src/main/resources/application.properties";
         File ConfigFile = new File(configFilePath);
         try {
             FileInputStream configFileReader = new FileInputStream(ConfigFile);
